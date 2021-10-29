@@ -1,0 +1,41 @@
+---
+- include_tasks: ubuntu.yml
+
+- name: Install Docker.
+  package:
+    name: docker-ce
+    state: present
+  notify: restart docker
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Ensure /etc/docker/ directory exists.
+  file:
+    path: /etc/docker
+    state: directory
+    mode: 0755
+  when: docker_daemon_options.keys() | length > 0
+
+- name: Configure Docker daemon options.
+  copy:
+    content: "{{ docker_daemon_options | to_nice_json }}"
+    dest: /etc/docker/daemon.json
+    mode: 0644
+  when: docker_daemon_options.keys() | length > 0
+  notify: restart docker
+
+- name: Ensure Docker is started and enabled at boot.
+  service:
+    name: docker
+    state: started
+    enabled: true
+  ignore_errors: "{{ ansible_check_mode }}"
+
+- name: Ensure handlers are notified now to avoid firewall conflicts.
+  meta: flush_handlers
+
+- name: Ensure docker users are added to the docker group.
+  user:
+    name: vagrant
+    groups:
+      - docker
+    append: true

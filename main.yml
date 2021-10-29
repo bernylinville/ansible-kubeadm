@@ -1,0 +1,13 @@
+---
+- hosts:
+    - master
+    - worker
+  become: true
+
+  pre_tasks:
+    - import_tasks: tasks/disable_ubuntu_swap.yml
+
+  roles:
+    - role: docker
+      tags:
+        - docker
