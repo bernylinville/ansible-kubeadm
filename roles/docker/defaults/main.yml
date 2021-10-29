@@ -1,6 +1,6 @@
 ---
 # Docker repo URL.
-docker_repo_url: https://download.docker.com/linux
+docker_repo_url: https://mirrors.ustc.edu.cn/docker-ce/linux
 
 # Used only for Ubuntu.
 docker_apt_release_channel: stable
