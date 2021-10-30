@@ -49,9 +49,9 @@ kubernetes_config_cluster_configuration:
 
 kubernetes_config_kube_proxy_configuration: {}
 
-kubernetes_apiserver_advertise_address: ''
+kubernetes_apiserver_advertise_address: '192.168.42.10'
 kubernetes_version_kubeadm: 'stable-{{ kubernetes_version }}'
-kubernetes_ignore_preflight_errors: 'all'
+kubernetes_ignore_preflight_errors: ''
 
 # Flannel config files.
 kubernetes_flannel_manifest_file_rbac: https://raw.githubusercontent.com/coreos/flannel/master/Documentation/k8s-manifests/kube-flannel-rbac.yml

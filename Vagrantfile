@@ -9,8 +9,8 @@ Vagrant.configure("2") do |config|
   config.vm.provider "virtualbox"
 
   config.vm.provider :virtualbox do |v|
-    v.memory = 4096
-    v.cpus = 2
+    v.memory = 8192
+    v.cpus = 4
     v.linked_clone = true
   end
 
@@ -19,9 +19,6 @@ Vagrant.configure("2") do |config|
     { :name => "k8s-0", :ip => "192.168.42.10" },
     { :name => "k8s-1", :ip => "192.168.42.11" },
     { :name => "k8s-2", :ip => "192.168.42.12" },
-    { :name => "k8s-3", :ip => "192.168.42.13" },
-    { :name => "k8s-4", :ip => "192.168.42.14" },
-    { :name => "k8s-5", :ip => "192.168.42.15" },
   ]
 
   # Provision each of the VMs.
