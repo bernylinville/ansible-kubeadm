@@ -1,0 +1,15 @@
+---
+- name: Ensure procps is installed.
+  package:
+    name: procps
+    state: present
+
+# See: https://kubernetes.io/docs/setup/production-environment/tools/kubeadm/install-kubeadm/#letting-iptables-see-bridged-traffic
+- name: Let iptables see bridged traffic.
+  sysctl:
+    name: "{{ item }}"
+    value: '1'
+    state: present
+  loop:
+    - net.bridge.bridge-nf-call-iptables
+    - net.bridge.bridge-nf-call-ip6tables
